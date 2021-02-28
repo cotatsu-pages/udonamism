@@ -127,13 +127,26 @@ export class TabletopActionService {
 
     let gameTable = new GameTable('gameTable');
     let testBgFile: ImageFile = null;
-    let bgFileContext = ImageFile.createEmpty('testTableBackgroundImage_image').toContext();
-    bgFileContext.url = './assets/images/BG10a_80.jpg';
+    let bgFileBlack = ImageFile.createEmpty('bg_black').toContext();
+    bgFileBlack.url = './assets/images/sheet_black.png';
+    ImageStorage.instance.add(bgFileBlack);
+
+
+    let bgFileChess = ImageFile.createEmpty('bg_chess').toContext();
+    bgFileChess.url = './assets/images/chesstempre.png';
+    ImageStorage.instance.add(bgFileChess);
+
+    
+
+    let bgFileContext = ImageFile.createEmpty('bg_white').toContext();
+    bgFileContext.url = './assets/images/sheet_white.png';
+
+
     testBgFile = ImageStorage.instance.add(bgFileContext);
     gameTable.name = '最初のテーブル';
     gameTable.imageIdentifier = testBgFile.identifier;
-    gameTable.width = 20;
-    gameTable.height = 15;
+    gameTable.width = 28;
+    gameTable.height = 24;
     gameTable.initialize();
 
     tableSelecter.viewTableIdentifier = gameTable.identifier;
@@ -145,55 +158,42 @@ export class TabletopActionService {
     let fileContext: ImageContext = null;
 
     testCharacter = new GameCharacter('testCharacter_1');
-    fileContext = ImageFile.createEmpty('testCharacter_1_image').toContext();
-    fileContext.url = './assets/images/mon_052.gif';
+    fileContext = ImageFile.createEmpty('none_icon').toContext();
+    fileContext.url = './assets/images/ic_account_circle_black_24dp_2x.png';
     testFile = ImageStorage.instance.add(fileContext);
-    testCharacter.location.x = 5 * 50;
-    testCharacter.location.y = 9 * 50;
-    testCharacter.initialize();
-    testCharacter.createTestGameDataElement('モンスターA', 1, testFile.identifier);
-
-    testCharacter = new GameCharacter('testCharacter_2');
     testCharacter.location.x = 8 * 50;
-    testCharacter.location.y = 8 * 50;
+    testCharacter.location.y = 17 * 50;
+    
     testCharacter.initialize();
-    testCharacter.createTestGameDataElement('モンスターB', 1, testFile.identifier);
+    testCharacter.createTestGameDataElement('コマ見本', 2, testFile.identifier);
 
-    testCharacter = new GameCharacter('testCharacter_3');
-    fileContext = ImageFile.createEmpty('testCharacter_3_image').toContext();
-    fileContext.url = './assets/images/mon_128.gif';
+    fileContext = ImageFile.createEmpty('image_shadow').toContext();
+    fileContext.url = './assets/images/shadow.png';
     testFile = ImageStorage.instance.add(fileContext);
-    testCharacter.location.x = 4 * 50;
-    testCharacter.location.y = 2 * 50;
-    testCharacter.initialize();
-    testCharacter.createTestGameDataElement('モンスターC', 3, testFile.identifier);
 
-    testCharacter = new GameCharacter('testCharacter_4');
-    fileContext = ImageFile.createEmpty('testCharacter_4_image').toContext();
-    fileContext.url = './assets/images/mon_150.gif';
+    fileContext = ImageFile.createEmpty('image_slip').toContext();
+    fileContext.url = './assets/images/slip.png';
     testFile = ImageStorage.instance.add(fileContext);
-    testCharacter.location.x = 6 * 50;
-    testCharacter.location.y = 11 * 50;
-    testCharacter.initialize();
-    testCharacter.createTestGameDataElement('キャラクターA', 1, testFile.identifier);
 
-    testCharacter = new GameCharacter('testCharacter_5');
-    fileContext = ImageFile.createEmpty('testCharacter_5_image').toContext();
-    fileContext.url = './assets/images/mon_211.gif';
+    fileContext = ImageFile.createEmpty('image_tex').toContext();
+    fileContext.url = './assets/images/tex.png';
     testFile = ImageStorage.instance.add(fileContext);
-    testCharacter.location.x = 12 * 50;
-    testCharacter.location.y = 12 * 50;
-    testCharacter.initialize();
-    testCharacter.createTestGameDataElement('キャラクターB', 1, testFile.identifier);
 
-    testCharacter = new GameCharacter('testCharacter_6');
-    fileContext = ImageFile.createEmpty('testCharacter_6_image').toContext();
-    fileContext.url = './assets/images/mon_135.gif';
+    fileContext = ImageFile.createEmpty('image_thunder').toContext();
+    fileContext.url = './assets/images/thunder.png';
     testFile = ImageStorage.instance.add(fileContext);
-    testCharacter.initialize();
-    testCharacter.location.x = 5 * 50;
-    testCharacter.location.y = 13 * 50;
-    testCharacter.createTestGameDataElement('キャラクターC', 1, testFile.identifier);
+
+    fileContext = ImageFile.createEmpty('image_web').toContext();
+    fileContext.url = './assets/images/web.png';
+    testFile = ImageStorage.instance.add(fileContext);
+
+    fileContext = ImageFile.createEmpty('image_prize').toContext();
+    fileContext.url = './assets/images/prize.png';
+    testFile = ImageStorage.instance.add(fileContext);
+
+    fileContext = ImageFile.createEmpty('image_logo').toContext();
+    fileContext.url = './assets/images/logo.png';
+    testFile = ImageStorage.instance.add(fileContext);
   }
 
   makeDefaultContextMenuActions(position: PointerCoordinate): ContextMenuAction[] {
