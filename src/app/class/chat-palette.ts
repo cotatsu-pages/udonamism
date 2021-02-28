@@ -69,7 +69,17 @@ export class ChatPalette extends ObjectNode {
         }
         if (extendVariables) {
           let element = extendVariables.getFirstElementByName(name);
-          if (element) return element.isNumberResource ? element.currentValue + '' : element.value + '';
+          //if (element) return element.isNumberResource ? element.currentValue + '' : element.value + '';
+          // AGIのソート調整で小数点以下使用するため、小数点以下切り捨てを実装
+          if (element){
+            if(element.isNumberResource){
+              return element.currentValue + '';
+            }else{
+              let curVal:any = + element.value;
+              return Math.floor(curVal) + '';
+            }
+          }
+
         }
         return '';
       });
