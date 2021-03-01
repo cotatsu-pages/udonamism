@@ -79,12 +79,17 @@ export class GameCharacter extends TabletopObject {
     let gameCharacterXMLDocument: Document = domParser.parseFromString(this.rootDataElement.toXml(), 'application/xml');
 
     let palette: ChatPalette = new ChatPalette('ChatPalette_' + this.identifier);
-    palette.setPalette(`チャットパレット入力例：
-2d6+1 ダイスロール
-１ｄ２０＋{敏捷}＋｛格闘｝　{name}の格闘！
-//敏捷=10+{敏捷A}
-//敏捷A=10
-//格闘＝１`);
+    palette.setPalette(`1d3 移動ロール
+
+    1d10<={VIT} VITロール
+    1d20<={ADP} ADPロール
+    1d20<={AGI} AGIロール
+    1d20<={TEC} TECロール
+    1d20<={FOR} FORロール
+    1d20<={STL} STLロール
+    1d20<={CRF} CRFロール
+
+    `);
     palette.initialize();
     this.appendChild(palette);
   }
