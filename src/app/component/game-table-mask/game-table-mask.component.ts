@@ -163,6 +163,19 @@ export class GameTableMaskComponent implements OnInit, OnDestroy, AfterViewInit 
   onMoved() {
     SoundEffect.play(PresetSound.cardPut);
   }
+  
+  isNoImage(): boolean{
+
+    if(this.imageFile == null){
+      return true;
+    }else{
+      if (this.imageFile.url.length > 1){
+        return false;
+      }else{
+        return true;
+      }
+    }
+  }
 
   private adjustMinBounds(value: number, min: number = 0): number {
     return value < min ? min : value;

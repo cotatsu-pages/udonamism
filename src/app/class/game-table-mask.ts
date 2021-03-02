@@ -1,3 +1,4 @@
+import { ImageFile } from './core/file-storage/image-file';
 import { SyncObject, SyncVar } from './core/synchronize-object/decorator';
 import { DataElement } from './data-element';
 import { TabletopObject } from './tabletop-object';
@@ -33,4 +34,31 @@ export class GameTableMask extends TabletopObject {
 
     return object;
   }
+
+  get imageFile(): ImageFile { return this.getImageFile('trick');}
+
+  static createTrickMask(name: string, width: number, height: number, opacity: number, trick: string, identifier?: string): GameTableMask {
+    let object: GameTableMask = null;
+    
+
+    if (identifier) {
+      object = new GameTableMask(identifier);
+    } else {
+      object = new GameTableMask();
+    }
+    object.createDataElements();
+
+
+    object.commonDataElement.appendChild(DataElement.create('name', name, {}, 'name_' + object.identifier));
+    object.commonDataElement.appendChild(DataElement.create('width', width, {}, 'width_' + object.identifier));
+    object.commonDataElement.appendChild(DataElement.create('height', height, {}, 'height_' + object.identifier));
+    object.imageDataElement.appendChild(DataElement.create('trick', trick, { type: 'image' }, 'trick_' + object.identifier));
+    object.commonDataElement.appendChild(DataElement.create('opacity', opacity, { type: 'numberResource', currentValue: opacity }, 'opacity_' + object.identifier));
+    object.initialize();
+
+    return object;
+  }
+
+
+
 }

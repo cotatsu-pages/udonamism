@@ -121,6 +121,42 @@ export class TabletopActionService {
     return cardStack;
   }
 
+
+
+  createTrickMask(position: PointerCoordinate, name: string, imagePathPrefix: string): GameTableMask {
+    let viewTable = this.getViewTable();
+    if (!viewTable) return;
+
+//    './assets/images/slip.png';
+    let trapUrl: string = './assets/images/' + imagePathPrefix;
+    if (!ImageStorage.instance.get(trapUrl)) {
+      ImageStorage.instance.add(trapUrl);
+    }
+
+
+    let tableMask = GameTableMask.createTrickMask(name, 2, 2, 100, trapUrl);
+    tableMask.location.x = position.x - 25;
+    tableMask.location.y = position.y - 25;
+    tableMask.posZ = position.z;
+
+    viewTable.appendChild(tableMask);
+    return tableMask;
+  }
+
+  createGameMasterMask(position: PointerCoordinate, maskWidth: number, maskHight:number): GameTableMask {
+    let viewTable = this.getViewTable();
+    if (!viewTable) return;
+
+    let tableMask = GameTableMask.create('マップマスク', maskWidth, maskHight, 100);
+    tableMask.location.x = position.x - 25;
+    tableMask.location.y = position.y - 25;
+    tableMask.posZ = position.z;
+
+    viewTable.appendChild(tableMask);
+    return tableMask;
+  }
+
+
   makeDefaultTable() {
     let tableSelecter = new TableSelecter('tableSelecter');
     tableSelecter.initialize();
@@ -198,11 +234,13 @@ export class TabletopActionService {
 
   makeDefaultContextMenuActions(position: PointerCoordinate): ContextMenuAction[] {
     return [
+      this.getCreateTrickMenu(position),
+      this.getCreateGmMenu(position),
       this.getCreateCharacterMenu(position),
       this.getCreateTableMaskMenu(position),
       this.getCreateTerrainMenu(position),
       this.getCreateTextNoteMenu(position),
-      this.getCreateTrumpMenu(position),
+      // this.getCreateTrumpMenu(position),
       this.getCreateDiceSymbolMenu(position),
     ];
   }
@@ -274,6 +312,61 @@ export class TabletopActionService {
       });
     });
     return { name: 'ダイスを作成', action: null, subActions: subMenus };
+  }
+
+
+
+  
+  private getCreateTrickMenu(position: PointerCoordinate): ContextMenuAction {
+    let tricks: { menuName: string, trickName: string, imagePathPrefix: string }[] = [
+      { menuName: 'スリップトラップ', trickName: 'スリップトラップ',  imagePathPrefix: 'slip.png' },
+      { menuName: 'キャプチャーウェブ', trickName: 'キャプチャーウェブ', imagePathPrefix: 'web.png' },
+      { menuName: 'サンダーボルト', trickName: 'サンダーボルト', imagePathPrefix: 'thunder.png' },
+      { menuName: 'シャドウ', trickName: 'シャドウ', imagePathPrefix: 'shadow.png' },
+      { menuName: 'タイムボム', trickName: 'タイムボム', imagePathPrefix: 'bomb.png' },
+    ];
+    let subMenus: ContextMenuAction[] = [];
+
+    tricks.forEach(item => {
+      subMenus.push({
+        name: item.menuName, action: () => {
+          this.createTrickMask(position, item.trickName, item.imagePathPrefix);
+          SoundEffect.play(PresetSound.cardPut);
+        }
+      });
+    });
+
+    return { name: 'トリックを設置', action: null, subActions: subMenus };
+  }
+
+
+  private getCreateGmMenu(position: PointerCoordinate): ContextMenuAction {
+    let masks: { menuName: string, maskType:string, maskName: string, widthSize: number,hightSize: number, imagePathPrefix: string }[] = [
+      { menuName: 'メインパネルベース', maskType:'mapMask' ,maskName: 'メインパネルベース', widthSize: 20,hightSize: 20,  imagePathPrefix: '' },
+      { menuName: 'サブパネルベース', maskType:'mapMask' ,maskName: 'サブパネルベース',widthSize: 10,hightSize: 10, imagePathPrefix: '' },
+      { menuName: '視界ベース', maskType:'mapMask' ,maskName: '視界ベース',widthSize: 6,hightSize: 6, imagePathPrefix: '' },
+      { menuName: 'プライズ', maskType:'elementMask' ,maskName: 'プライズ',widthSize: 2,hightSize: 2,  imagePathPrefix: 'prize.png' },
+      // { menuName: 'D10', trapName: 'D10', type: DiceType.D10, imagePathPrefix: '10_dice' },
+      // { menuName: 'D10 (00-90)', trapName: 'D10', type: DiceType.D10_10TIMES, imagePathPrefix: '100_dice' },
+      // { menuName: 'D12', trapName: 'D12', type: DiceType.D12, imagePathPrefix: '12_dice' },
+      // { menuName: 'D20', trapName: 'D20', type: DiceType.D20, imagePathPrefix: '20_dice' },
+    ];
+    let subMenus: ContextMenuAction[] = [];
+
+    masks.forEach(item => {
+      subMenus.push({
+        name: item.menuName, action: () => {
+          if(item.maskType == "mapMask"){
+            this.createGameMasterMask(position, item.widthSize, item.hightSize);
+          }else{
+            this.createTrickMask(position, item.maskName, item.imagePathPrefix);
+          }
+          SoundEffect.play(PresetSound.cardPut);
+        }
+      });
+    });
+
+    return { name: 'マスターパネル', action: null, subActions: subMenus };
   }
 
   private getViewTable(): GameTable {
