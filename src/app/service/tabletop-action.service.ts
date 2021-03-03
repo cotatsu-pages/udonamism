@@ -212,7 +212,7 @@ export class TabletopActionService {
     testFile = ImageStorage.instance.add(fileContext);
 
     fileContext = ImageFile.createEmpty('image_tex').toContext();
-    fileContext.url = './assets/images/tex.png';
+    fileContext.url = './assets/images/tex.jpg';
     testFile = ImageStorage.instance.add(fileContext);
 
     fileContext = ImageFile.createEmpty('image_thunder').toContext();
