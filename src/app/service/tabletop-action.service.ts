@@ -346,10 +346,6 @@ export class TabletopActionService {
       { menuName: 'サブパネルベース', maskType:'mapMask' ,maskName: 'サブパネルベース',widthSize: 10,hightSize: 10, imagePathPrefix: '' },
       { menuName: '視界ベース', maskType:'mapMask' ,maskName: '視界ベース',widthSize: 6,hightSize: 6, imagePathPrefix: '' },
       { menuName: 'プライズ', maskType:'elementMask' ,maskName: 'プライズ',widthSize: 2,hightSize: 2,  imagePathPrefix: 'prize.png' },
-      // { menuName: 'D10', trapName: 'D10', type: DiceType.D10, imagePathPrefix: '10_dice' },
-      // { menuName: 'D10 (00-90)', trapName: 'D10', type: DiceType.D10_10TIMES, imagePathPrefix: '100_dice' },
-      // { menuName: 'D12', trapName: 'D12', type: DiceType.D12, imagePathPrefix: '12_dice' },
-      // { menuName: 'D20', trapName: 'D20', type: DiceType.D20, imagePathPrefix: '20_dice' },
     ];
     let subMenus: ContextMenuAction[] = [];
 
