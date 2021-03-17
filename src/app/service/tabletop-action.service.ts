@@ -127,14 +127,8 @@ export class TabletopActionService {
     let viewTable = this.getViewTable();
     if (!viewTable) return;
 
-//    './assets/images/slip.png';
-    let trapUrl: string = './assets/images/' + imagePathPrefix;
-    if (!ImageStorage.instance.get(trapUrl)) {
-      ImageStorage.instance.add(trapUrl);
-    }
 
-
-    let tableMask = GameTableMask.createTrickMask(name, 2, 2, 100, trapUrl);
+    let tableMask = GameTableMask.createTrickMask(name, 2, 2, 100, imagePathPrefix);
     tableMask.location.x = position.x - 25;
     tableMask.location.y = position.y - 25;
     tableMask.posZ = position.z;
@@ -221,6 +215,10 @@ export class TabletopActionService {
 
     fileContext = ImageFile.createEmpty('image_web').toContext();
     fileContext.url = './assets/images/web.png';
+    testFile = ImageStorage.instance.add(fileContext);
+
+    fileContext = ImageFile.createEmpty('image_bomb').toContext();
+    fileContext.url = './assets/images/bomb.png';
     testFile = ImageStorage.instance.add(fileContext);
 
     fileContext = ImageFile.createEmpty('image_prize').toContext();
@@ -319,11 +317,12 @@ export class TabletopActionService {
   
   private getCreateTrickMenu(position: PointerCoordinate): ContextMenuAction {
     let tricks: { menuName: string, trickName: string, imagePathPrefix: string }[] = [
-      { menuName: 'スリップトラップ', trickName: 'スリップトラップ',  imagePathPrefix: 'slip.png' },
-      { menuName: 'キャプチャーウェブ', trickName: 'キャプチャーウェブ', imagePathPrefix: 'web.png' },
-      { menuName: 'サンダーボルト', trickName: 'サンダーボルト', imagePathPrefix: 'thunder.png' },
-      { menuName: 'シャドウ', trickName: 'シャドウ', imagePathPrefix: 'shadow.png' },
-      { menuName: 'タイムボム', trickName: 'タイムボム', imagePathPrefix: 'bomb.png' },
+
+      { menuName: 'スリップトラップ', trickName: 'スリップトラップ',  imagePathPrefix: 'slip' },
+      { menuName: 'キャプチャーウェブ', trickName: 'キャプチャーウェブ', imagePathPrefix: 'web' },
+      { menuName: 'サンダーボルト', trickName: 'サンダーボルト', imagePathPrefix: 'thunder' },
+      { menuName: 'シャドウ', trickName: 'シャドウ', imagePathPrefix: 'shadow' },
+      { menuName: 'タイムボム', trickName: 'タイムボム', imagePathPrefix: 'bomb' },
     ];
     let subMenus: ContextMenuAction[] = [];
 
@@ -345,7 +344,7 @@ export class TabletopActionService {
       { menuName: 'メインパネルベース', maskType:'mapMask' ,maskName: 'メインパネルベース', widthSize: 20,hightSize: 20,  imagePathPrefix: '' },
       { menuName: 'サブパネルベース', maskType:'mapMask' ,maskName: 'サブパネルベース',widthSize: 10,hightSize: 10, imagePathPrefix: '' },
       { menuName: '視界ベース', maskType:'mapMask' ,maskName: '視界ベース',widthSize: 6,hightSize: 6, imagePathPrefix: '' },
-      { menuName: 'プライズ', maskType:'elementMask' ,maskName: 'プライズ',widthSize: 2,hightSize: 2,  imagePathPrefix: 'prize.png' },
+      { menuName: 'プライズ', maskType:'elementMask' ,maskName: 'プライズ',widthSize: 2,hightSize: 2,  imagePathPrefix: 'prize' },
     ];
     let subMenus: ContextMenuAction[] = [];
 

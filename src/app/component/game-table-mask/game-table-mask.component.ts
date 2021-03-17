@@ -24,6 +24,7 @@ import { CoordinateService } from 'service/coordinate.service';
 import { PanelOption, PanelService } from 'service/panel.service';
 import { PointerDeviceService } from 'service/pointer-device.service';
 import { TabletopActionService } from 'service/tabletop-action.service';
+import { TrickService } from 'service/trick.servece';
 
 @Component({
   selector: 'game-table-mask',
@@ -39,9 +40,28 @@ export class GameTableMaskComponent implements OnInit, OnDestroy, AfterViewInit 
   get width(): number { return this.adjustMinBounds(this.gameTableMask.width); }
   get height(): number { return this.adjustMinBounds(this.gameTableMask.height); }
   get opacity(): number { return this.gameTableMask.opacity; }
-  get imageFile(): ImageFile { return this.gameTableMask.imageFile; }
+  get trick(): string { return this.gameTableMask.trick; }
+  get imageFile(): ImageFile { 
+    if (!this.trick){
+      return this.gameTableMask.imageFile; 
+      // return ;
+    }else{
+      this.gameTableMask.isTrick = true;
+      return this.trickService.getSkeletonOrTrick(this.trick);
+    }
+  }
+ 
   get isLock(): boolean { return this.gameTableMask.isLock; }
-  set isLock(isLock: boolean) { this.gameTableMask.isLock = isLock; }
+  set isLock(isLock: boolean) { this.gameTableMask.isLock = isLock;}
+
+  get isTrick(): boolean { return this.gameTableMask.isTrick; }
+  set isTrick(isTrick: boolean) { 
+    if (!this.trick){
+      this.gameTableMask.isTrick = isTrick;
+    }else{
+      this.gameTableMask.isTrick = true;
+    }
+  }
 
   gridSize: number = 50;
 
@@ -58,6 +78,7 @@ export class GameTableMaskComponent implements OnInit, OnDestroy, AfterViewInit 
     private changeDetector: ChangeDetectorRef,
     private pointerDeviceService: PointerDeviceService,
     private coordinateService: CoordinateService,
+    private trickService: TrickService,
   ) { }
 
   ngOnInit() {
@@ -132,8 +153,12 @@ export class GameTableMaskComponent implements OnInit, OnDestroy, AfterViewInit 
           }
         }
       ),
-      ContextMenuSeparator,
-      { name: 'マップマスクを編集', action: () => { this.showDetail(this.gameTableMask); } },
+      (!this.isTrick
+        ? 
+        {name: 'マップマスクを編集', action: () => { this.showDetail(this.gameTableMask); } }
+        :ContextMenuSeparator
+      ),
+      
       {
         name: 'コピーを作る', action: () => {
           let cloneObject = this.gameTableMask.clone();
