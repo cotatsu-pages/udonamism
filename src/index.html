@@ -1,6 +1,10 @@
 <!doctype html>
 <html>
-
+  <script type="text/javascript">
+    window.onbeforeunload = function(e) {
+      e.returnValue = "Udonariumを離れます。よろしいですか？";
+    }
+</script>
 <head>
   <meta charset="utf-8">
   <title>Udonarium 1.13.1</title>
