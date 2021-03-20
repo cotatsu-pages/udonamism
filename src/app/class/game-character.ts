@@ -67,13 +67,8 @@ export class GameCharacter extends TabletopObject {
     //TEST
     testElement = DataElement.create('技能', '', {}, '技能' + this.identifier);
     this.detailDataElement.appendChild(testElement);
-    testElement.appendChild(DataElement.create('', '', {}, '' + this.identifier));
-    testElement.appendChild(DataElement.create('', '', {}, '' + this.identifier));
-    testElement.appendChild(DataElement.create('', '', {}, '' + this.identifier));
-    testElement.appendChild(DataElement.create('', '', {}, '' + this.identifier));
-    testElement.appendChild(DataElement.create('', '', {}, '' + this.identifier));
-    testElement.appendChild(DataElement.create('', '', {}, '' + this.identifier));
-    testElement.appendChild(DataElement.create('', '', {}, '' + this.identifier));
+    testElement.appendChild(DataElement.create('チェス,攻撃', '通常攻撃', {}, 'チェス,攻撃' + this.identifier));
+
 
     let domParser: DOMParser = new DOMParser();
     let gameCharacterXMLDocument: Document = domParser.parseFromString(this.rootDataElement.toXml(), 'application/xml');
