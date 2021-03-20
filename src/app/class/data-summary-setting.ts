@@ -20,7 +20,7 @@ export class DataSummarySetting extends GameObject implements InnerXml {
   }
 
   @SyncVar() sortTag: string = 'AGI';
-  @SyncVar() sortOrder: SortOrder = SortOrder.ASC;
+  @SyncVar() sortOrder: SortOrder = SortOrder.DESC;
   //@SyncVar() dataTag: string = 'HP MP 敏捷度 生命力 精神力';
   @SyncVar() dataTag: string = 'VIT AGI ADP TEC FOR STL CRF';
 
