@@ -56,11 +56,12 @@ export class GameTableMaskComponent implements OnInit, OnDestroy, AfterViewInit 
 
   get isTrick(): boolean { return this.gameTableMask.isTrick; }
   set isTrick(isTrick: boolean) { 
-    if (!this.trick){
-      this.gameTableMask.isTrick = isTrick;
-    }else{
-      this.gameTableMask.isTrick = true;
-    }
+    this.gameTableMask.isLock = isTrick;
+    // if (!this.trick){
+    //   this.gameTableMask.isTrick = isTrick;
+    // }else{
+    //   this.gameTableMask.isTrick = true;
+    // }
   }
 
   gridSize: number = 50;
