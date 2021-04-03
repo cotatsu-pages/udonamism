@@ -53,6 +53,7 @@ import { ModalService } from 'service/modal.service';
 import { PanelService } from 'service/panel.service';
 import { PointerDeviceService } from 'service/pointer-device.service';
 import { TabletopService } from 'service/tabletop.service';
+import { TrickService } from 'service/trick.servece';
 
 import { AppComponent } from './app.component';
 
@@ -117,6 +118,7 @@ import { AppComponent } from './app.component';
     PanelService,
     PointerDeviceService,
     TabletopService,
+    TrickService
   ],
   bootstrap: [AppComponent]
 })
