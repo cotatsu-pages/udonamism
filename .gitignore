@@ -44,3 +44,12 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+angular.json
+package.json
+udonamism.zip
+yarn.lock
+.vscode/launch.json
+.gitignore
+angular.json
+package.json
+udonamism/

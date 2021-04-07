@@ -46,7 +46,7 @@ export class GameTableMaskComponent implements OnInit, OnDestroy, AfterViewInit 
       return this.gameTableMask.imageFile; 
       // return ;
     }else{
-      this.gameTableMask.isTrick = true;
+      // this.gameTableMask.trick = true;
       return this.trickService.getSkeletonOrTrick(this.trick);
     }
   }
@@ -54,14 +54,14 @@ export class GameTableMaskComponent implements OnInit, OnDestroy, AfterViewInit 
   get isLock(): boolean { return this.gameTableMask.isLock; }
   set isLock(isLock: boolean) { this.gameTableMask.isLock = isLock;}
 
-  get isTrick(): boolean { return this.gameTableMask.isTrick; }
-  set isTrick(isTrick: boolean) { 
-    if (!this.trick){
-      this.gameTableMask.isTrick = isTrick;
-    }else{
-      this.gameTableMask.isTrick = true;
-    }
-  }
+  // get isTrick(): boolean { return this.gameTableMask.isTrick; }
+  // set isTrick(isTrick: boolean) { 
+  //   if (!this.trick){
+  //     this.gameTableMask.isTrick = isTrick;
+  //   }else{
+  //     this.gameTableMask.isTrick = true;
+  //   }
+  // }
 
   gridSize: number = 50;
 
@@ -153,11 +153,11 @@ export class GameTableMaskComponent implements OnInit, OnDestroy, AfterViewInit 
           }
         }
       ),
-      (!this.isTrick
-        ? 
-        {name: 'マップマスクを編集', action: () => { this.showDetail(this.gameTableMask); } }
-        :ContextMenuSeparator
-      ),
+      // (!this.isTrick
+      //   ? 
+      //   {name: 'マップマスクを編集', action: () => { this.showDetail(this.gameTableMask); } }
+      //   :ContextMenuSeparator
+      // ),
       
       {
         name: 'コピーを作る', action: () => {
