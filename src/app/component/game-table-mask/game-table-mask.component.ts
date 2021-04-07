@@ -153,11 +153,13 @@ export class GameTableMaskComponent implements OnInit, OnDestroy, AfterViewInit 
           }
         }
       ),
-      // (!this.isTrick
-      //   ? 
-      //   {name: 'マップマスクを編集', action: () => { this.showDetail(this.gameTableMask); } }
-      //   :ContextMenuSeparator
-      // ),
+      (
+        !this.gameTableMask.trick
+        ? 
+        {name: 'マップマスクを編集', action: () => { this.showDetail(this.gameTableMask); } }
+        :ContextMenuSeparator
+      )
+      ,
       
       {
         name: 'コピーを作る', action: () => {
