@@ -42,10 +42,10 @@ export class GameTableMaskComponent implements OnInit, OnDestroy, AfterViewInit 
   get opacity(): number { return this.gameTableMask.opacity; }
   get trick(): string { return this.gameTableMask.trick; }
   get imageFile(): ImageFile { 
-    if (!this.trick){
+    if (!this.trick||!this.gameTableMask.imageFile.isEmpty){
       return this.gameTableMask.imageFile; 
     }else{
-      return this.trickService.getSkeletonOrTrick(this.trick);
+      return this.trickService.getSkeletonOrTrick(this.trick, this.gameTableMask.imageFile);
     }
   }
  

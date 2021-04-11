@@ -3,7 +3,6 @@ import { ImageFile } from '@udonarium/core/file-storage/image-file';
 
 const skeletonImage: ImageFile = ImageFile.create('./assets/images/skeleton.png');
 
-const shadowImage : ImageFile = ImageFile.create('./assets/images/shadow.png');
 const slipImage : ImageFile = ImageFile.create('./assets/images/slip.png');
 const thunderImage : ImageFile = ImageFile.create('./assets/images/thunder.png');
 const webImage : ImageFile = ImageFile.create('./assets/images/web.png');
@@ -23,35 +22,52 @@ export class TrickService {
   }
 
 
-  getSkeletonOrTrick(trick: string): ImageFile {
+  getSkeletonOrTrick(trick: string, image: ImageFile): ImageFile {
+
+    let imgUrl = "";
     switch (trick){
       case 'shadow':
-        return shadowImage;
+        imgUrl = './assets/images/shadow.png';
+        // const trickImage = ImageFile.create('./assets/images/shadow.png');
+        // return shadowImage;
         break;
 
       case 'slip':
-        return slipImage;
+        imgUrl = './assets/images/slip.png';
+        // return ImageFile.create('./assets/images/slip.png');;
+        // return slipImage;
         break;
     
       case 'thunder':
-        return thunderImage;
+        imgUrl = './assets/images/thunder.png';
+        // return ImageFile.create('./assets/images/thunder.png');
+        // return thunderImage;
         break;
   
       case 'web':
-        return webImage;
+        imgUrl = './assets/images/web.png';
+        // return ImageFile.create('./assets/images/web.png');
+        // return webImage;
         break;
   
       case 'bomb':
-        return bombImage;
+        imgUrl = './assets/images/bomb.png';
+        // return ImageFile.create('./assets/images/bomb.png');
+        // return bombImage;
         break;
 
       case 'prize':
-        return prizeImage;
+        imgUrl = './assets/images/prize.png';
+        // return ImageFile.create('./assets/images/prize.png');
+        // return prizeImage;
         break;
 
       default :
         return skeletonImage;
+        break;
     }
+
+    return ImageFile.create(imgUrl);
   }
 
   getSkeltonOrUrl(imageUrl: string) :ImageFile {
